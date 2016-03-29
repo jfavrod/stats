@@ -263,21 +263,17 @@ void translateCSV(char numbersCSV[], double numbers[], int * count)
 /*****************************************************************
 // Function name:       ascending
 //
-// Description:         Sorts an array of doubles from least to
+// Description:         Sort function for qsort for assending sort.
 //
-// Parameters:          numbers
+// Parameters:          Provided by qsort.
 //
-// Return values:       void
+// Return values:       Handled by qsort.
 ****************************************************************/
 
 int ascending(const void *p, const void *q) {
     int x = *(const int *)p;
     int y = *(const int *)q;
 
-    /* Avoid return x - y, which can cause undefined behaviour
-       because of signed integer overflow.
-       Return -1 if you want ascending, 1 if you want descending order. 
-       Return 1 if you want ascending, -1 if you want descending order. */
     if (x < y)
         return -1;  
     else if (x > y)
@@ -286,3 +282,30 @@ int ascending(const void *p, const void *q) {
     return 0;
 }
 
+
+/*****************************************************************
+// Function name:    in_darray
+//
+// Description:      Looks in an array of doubles for a given
+//                   double value.
+//
+// Parameters:       needle (double) A double to search for.
+//                   haystack (double[]) The array to search.
+//                   count (int) The number of items in the
+//                   array
+//
+// Return values:    1 if needle is found, 0 otherwise.
+****************************************************************/
+
+int in_darray(double needle, double haystack[], int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++) {
+        if (haystack[i] == needle) {
+            return 1;
+        }
+    }
+
+    return 0;
+}

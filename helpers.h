@@ -26,6 +26,7 @@ int round_up(int x, int round);
 int validateCSV(char numbersCSV[]);
 void translateCSV(char numbersCSV[], double numbers[], int * count);
 int ascending(const void *p, const void *q);
+int in_darray(double needle, double haystack[], int count);
 
 #define FALSE 0
 #define TRUE 1
