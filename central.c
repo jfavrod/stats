@@ -10,9 +10,9 @@
 
 void usage(void);
 int validateCSV(char numbersCSV[]);
-void translateCSV(char numbersCSV[], double numbers[]);
-double mean(char numbers[]);
-double median(char numbers[]);
+void translateCSV(char numbersCSV[], double numbers[], int * count);
+double mean(double numbers[], int count);
+double median(double numbers[], int count);
 
 #define FALSE 0
 #define TRUE 1
@@ -25,20 +25,24 @@ double median(char numbers[]);
 int main(int argc, char *argv[])
 {
     double numbers[MAX_NUMBERS] = {0.0};
+    int    count                = 0;
 
     if (argc == 1 || argc < 1 || argc > 3 || !validateCSV(argv[2])) {
         usage();
     }
     else {
-        translateCSV(argv[2], numbers);
-        /*
+        translateCSV(argv[2], numbers, &count);
         if (strcmp(argv[1], "mean") == 0) {
-            mean(argv[2]);
+            mean(numbers, count);
         }
-        if (strcmp(argv[1], "median") == 0) {
+        /*
+        else if (strcmp(argv[1], "median") == 0) {
             median(argv[2]);
         }
         */
+        else {
+            usage();
+        }
     }
 
     return 0;
@@ -125,7 +129,7 @@ int validateCSV(char numbersCSV[])
  * @return void
  */
 
-void translateCSV(char numbersCSV[], double numbers[])
+void translateCSV(char numbersCSV[], double numbers[], int * count)
 {
     int  i              = 0;
     int  j              = 0;
@@ -140,6 +144,7 @@ void translateCSV(char numbersCSV[], double numbers[])
         }
         else {
             numbers[k++] = atof(tmp);
+            ++(*count);
             str_clear(tmp);
             j = 0;
         }
@@ -157,28 +162,16 @@ void translateCSV(char numbersCSV[], double numbers[])
  * @return void
  */
 
-double mean(char numbers[])
+double mean(double numbers[], int count)
 {
-    int    i              = 0;
-    int    j              = 0;
-    double count          = 0.0;
-    double sum            = 0.0;
-    char   tmp[MAX_CHARS] = "";
+    int    i   = 0;
+    double sum = 0.0;
 
-    do {
-        tmp[i] = numbers[j];
-        if (tmp[i] == ',' || tmp[i] == '\0') {
-            tmp[i] = '\0';
-            sum = sum + atof(tmp);
-            ++count;
-            str_clear(tmp);
-            i = -1;
-        }
-        i++;
+    for (; i < count; i++) {
+        sum = sum + numbers[i];
     }
-    while (numbers[j++] != '\0');
 
-    printf("The mean is %f\n", sum/count);
+    printf("The mean is: %f\n", sum/count);
     return sum/count;
 }
 
@@ -192,28 +185,8 @@ double mean(char numbers[])
  * @return double The median of the given numbers.
  */
 
-double median(char numbers[])
+double median(double numbers[], int count)
 {
-
-    int i     = 0;
-    int count = 0;
-    int mid   = 0;
-
-    do {
-        if (numbers[i] == ',' || numbers[i] == '\0') {
-            ++count;
-        }
-    }
-    while (numbers[i++] != '\0');
-
-    mid = (int)ceil((double)count/2.0);
-
-    if ((count % 2) != 0) {
-        count = 0;
-    }
-
-    printf("the middle position is %i\n", mid);
-
     return 0.0;
 }
 
