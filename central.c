@@ -9,12 +9,14 @@
 #include <math.h>
 
 void usage(void);
-int validateCSV(char numbers[]);
+int validateCSV(char numbersCSV[]);
+void translateCSV(char numbersCSV[], double numbers[]);
 double mean(char numbers[]);
 double median(char numbers[]);
 
 #define FALSE 0
 #define TRUE 1
+#define MAX_NUMBERS 1000000
 #define MAX_CHARS 80
 
 #endif
@@ -22,16 +24,21 @@ double median(char numbers[]);
 
 int main(int argc, char *argv[])
 {
+    double numbers[MAX_NUMBERS] = {0.0};
+
     if (argc == 1 || argc < 1 || argc > 3 || !validateCSV(argv[2])) {
         usage();
     }
     else {
+        translateCSV(argv[2], numbers);
+        /*
         if (strcmp(argv[1], "mean") == 0) {
             mean(argv[2]);
         }
         if (strcmp(argv[1], "median") == 0) {
             median(argv[2]);
         }
+        */
     }
 
     return 0;
@@ -62,21 +69,21 @@ void usage()
  * Checks the numbers string is a CSV list of numbers --
  * either ints or doubles.
  *
- * @param char numbers[] A string representation of a CSV list of
+ * @param char numbersCSV[] A string representation of a CSV list of
  * numbers (ints or doubles).
  *
- * @return int TRUE if numbers string is a valid CSV list of numbers,
+ * @return int TRUE if numbersCSV is a valid CSV list of numbersCSV,
  * FALSE otherwise.
  */
 
-int validateCSV(char numbers[])
+int validateCSV(char numbersCSV[])
 { 
     int  boolean = TRUE;
     int  i       = 0;
     int  dec     = 0;
     char tmpc    = '\0';
 
-    while ((tmpc = numbers[i]) != '\0') {
+    while ((tmpc = numbersCSV[i]) != '\0') {
         if (!isdigit(tmpc)) {
             if (tmpc == '.' && dec == 0) {
                 ++dec;
@@ -97,12 +104,47 @@ int validateCSV(char numbers[])
     }
 
     /* Make sure the last entry in the list is a digit. */
-    if (!isdigit(tmpc = numbers[--i])) {
+    if (!isdigit(tmpc = numbersCSV[--i])) {
         boolean = FALSE;
     }
 
     boolean ? : printf("The CSV is malformed!\n\n");
     return boolean;
+}
+
+
+/**
+ * translateCSV
+ *
+ * Takes the numbersCSV and convert it to an array of doubles.
+ *
+ * @param char numbersCSV[] The CSV representing the working numbers.
+ * @param double numbers[] The array the contains the numbers
+ * translated to doubles from the CSV.
+ *
+ * @return void
+ */
+
+void translateCSV(char numbersCSV[], double numbers[])
+{
+    int  i              = 0;
+    int  j              = 0;
+    int  k              = 0;
+    char tmpc           = '\0';
+    char tmp[MAX_CHARS] = "";
+
+    do {
+        tmpc = numbersCSV[i++];
+        if (tmpc != ',' && tmpc != '\0') {
+            tmp[j++] = tmpc;
+        }
+        else {
+            numbers[k++] = atof(tmp);
+            str_clear(tmp);
+            j = 0;
+        }
+    }
+    while (tmpc != '\0');
 }
 
 
@@ -155,7 +197,7 @@ double median(char numbers[])
 
     int i     = 0;
     int count = 0;
-    int midpt = 0;
+    int mid   = 0;
 
     do {
         if (numbers[i] == ',' || numbers[i] == '\0') {
@@ -189,6 +231,6 @@ double mode(char numbers[])
 {
     printf("mode numbers are %s\n", numbers);
 
-    return;
+    return 0.0;
 }
 
