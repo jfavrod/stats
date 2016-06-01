@@ -29,11 +29,9 @@ int main(int argc, char *argv[])
         if (strcmp(argv[1], "mean") == 0) {
             mean(numbers, count);
         }
-        /*
         else if (strcmp(argv[1], "median") == 0) {
-            median(argv[2]);
+            median(numbers, count);
         }
-        */
         else {
             usage();
         }
@@ -95,7 +93,21 @@ double mean(double numbers[], int count)
 
 double median(double numbers[], int count)
 {
-    return 0.0;
+    double tmp[2];
+
+    qsort(numbers, count, MAX_NUMBERS, ascending);
+
+    if ((count % 2) != 0) {
+        tmp[0] = numbers[(int)ceil(count/2)];
+    }
+    else {
+        tmp[0] = numbers[count/2];
+        tmp[1] = numbers[(count/2)-1];
+        tmp[0] = mean(tmp, 2);
+    }
+
+    printf("The meadian is: %f\n", tmp[0]);
+    return tmp[0];
 }
 
 

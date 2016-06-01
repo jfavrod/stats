@@ -25,6 +25,7 @@ int str_replace(char needle, char haystack[], char replace);
 int round_up(int x, int round);
 int validateCSV(char numbersCSV[]);
 void translateCSV(char numbersCSV[], double numbers[], int * count);
+int ascending(const void *p, const void *q);
 
 #define FALSE 0
 #define TRUE 1
