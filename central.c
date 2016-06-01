@@ -3,21 +3,15 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <ctype.h>
 #include "helpers.h"
 #include <math.h>
 
 void usage(void);
-int validateCSV(char numbersCSV[]);
-void translateCSV(char numbersCSV[], double numbers[], int * count);
 double mean(double numbers[], int count);
 double median(double numbers[], int count);
 
-#define FALSE 0
-#define TRUE 1
 #define MAX_NUMBERS 1000000
-#define MAX_CHARS 80
 
 #endif
 
@@ -64,92 +58,6 @@ void usage()
     for (; i < (sizeof(item)/sizeof(char *)); i++) {
         printf("%s\n", item[i]);
     }
-}
-
-
-/**
- * validateCSV
- *
- * Checks the numbers string is a CSV list of numbers --
- * either ints or doubles.
- *
- * @param char numbersCSV[] A string representation of a CSV list of
- * numbers (ints or doubles).
- *
- * @return int TRUE if numbersCSV is a valid CSV list of numbersCSV,
- * FALSE otherwise.
- */
-
-int validateCSV(char numbersCSV[])
-{ 
-    int  boolean = TRUE;
-    int  i       = 0;
-    int  dec     = 0;
-    char tmpc    = '\0';
-
-    while ((tmpc = numbersCSV[i]) != '\0') {
-        if (!isdigit(tmpc)) {
-            if (tmpc == '.' && dec == 0) {
-                ++dec;
-                ++i;
-            }
-            else if (tmpc == ',') {
-                dec = 0;
-                ++i;
-            }
-            else {
-                boolean = FALSE;
-                break;
-            }
-        }
-        else {
-            ++i;
-        }
-    }
-
-    /* Make sure the last entry in the list is a digit. */
-    if (!isdigit(tmpc = numbersCSV[--i])) {
-        boolean = FALSE;
-    }
-
-    boolean ? : printf("The CSV is malformed!\n\n");
-    return boolean;
-}
-
-
-/**
- * translateCSV
- *
- * Takes the numbersCSV and convert it to an array of doubles.
- *
- * @param char numbersCSV[] The CSV representing the working numbers.
- * @param double numbers[] The array the contains the numbers
- * translated to doubles from the CSV.
- *
- * @return void
- */
-
-void translateCSV(char numbersCSV[], double numbers[], int * count)
-{
-    int  i              = 0;
-    int  j              = 0;
-    int  k              = 0;
-    char tmpc           = '\0';
-    char tmp[MAX_CHARS] = "";
-
-    do {
-        tmpc = numbersCSV[i++];
-        if (tmpc != ',' && tmpc != '\0') {
-            tmp[j++] = tmpc;
-        }
-        else {
-            numbers[k++] = atof(tmp);
-            ++(*count);
-            str_clear(tmp);
-            j = 0;
-        }
-    }
-    while (tmpc != '\0');
 }
 
 

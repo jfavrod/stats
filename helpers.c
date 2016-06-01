@@ -40,6 +40,7 @@ void clear_input_buff(void)
 //  Return values:      int : The first int found in the input buffer.
 //
 **********************************************************************/
+
 int get_int(void)
 {
     char input[1];
@@ -149,21 +150,112 @@ int str_replace(char needle, char haystack[], char replace)
 
 
 /*****************************************************************
- *
- *  Function name:      round_up
- *
- *  DESCRIPTION:        Rounds an integer up to the nearest round
- *                      place (base 10).
- *
- *  Parameters:         x (int):
- *                      round (int): The place to round x.
- *
- *  Return values:      rounded (int): The round value.
- *
- ****************************************************************/
+//
+//  Function name:      round_up
+//
+//  DESCRIPTION:        Rounds an integer up to the nearest round
+//                      place (base 10).
+//
+//  Parameters:         x (int):
+//                      round (int): The place to round x.
+//
+//  Return values:      rounded (int): The round value.
+//
+****************************************************************/
+
 int round_up(int x, int round)
 {
     int remainder = x % round;
     int rounded = (remainder == 0) ? x : ((x - remainder) + round);
     return rounded;
 }
+
+
+/*****************************************************************
+// Function name:       validateCSV
+//
+// Description:         Checks the numbers string is a CSV list of
+//                      numbers -- either ints or doubles.
+//
+// Parameters:          numbersCSV (char[]) A string representation
+//                      of a CSV list of numbers (ints or doubles).
+//
+// Return values:       boolean (int) TRUE if numbersCSV is a valid
+//                      CSV list of numbersCSV, FALSE otherwise.
+****************************************************************/
+
+int validateCSV(char numbersCSV[])
+{ 
+    int  boolean = TRUE;
+    int  i       = 0;
+    int  dec     = 0;
+    char tmpc    = '\0';
+
+    while ((tmpc = numbersCSV[i]) != '\0') {
+        if (!isdigit(tmpc)) {
+            if (tmpc == '.' && dec == 0) {
+                ++dec;
+                ++i;
+            }
+            else if (tmpc == ',') {
+                dec = 0;
+                ++i;
+            }
+            else {
+                boolean = FALSE;
+                break;
+            }
+        }
+        else {
+            ++i;
+        }
+    }
+
+    /* Make sure the last entry in the list is a digit. */
+    if (!isdigit(tmpc = numbersCSV[--i])) {
+        boolean = FALSE;
+    }
+
+    boolean ? : printf("The CSV is malformed!\n\n");
+    return boolean;
+}
+
+
+/*****************************************************************
+// Function name:       translateCSV
+//
+// Description:         Takes the numbersCSV and convert it to an
+//                      array of doubles.
+//
+// Parameters:          numbersCSV (char[]) The CSV representing
+//                      the working numbers.
+//                      numbers (double[]) The array that contains
+//                      the numbers translated to doubles from the
+//                      CSV.
+//
+// Return values:       void
+****************************************************************/
+
+void translateCSV(char numbersCSV[], double numbers[], int * count)
+{
+    int  i              = 0;
+    int  j              = 0;
+    int  k              = 0;
+    char tmpc           = '\0';
+    char tmp[MAX_CHARS] = "";
+
+    do {
+        tmpc = numbersCSV[i++];
+        if (tmpc != ',' && tmpc != '\0') {
+            tmp[j++] = tmpc;
+        }
+        else {
+            numbers[k++] = atof(tmp);
+            ++(*count);
+            str_clear(tmp);
+            j = 0;
+        }
+    }
+    while (tmpc != '\0');
+}
+

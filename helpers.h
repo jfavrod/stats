@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 void clear_input_buff(void);
 int get_int(void);
@@ -22,6 +23,12 @@ int inrange(int x, int low, int high);
 int str_clear(char str[]);
 int str_replace(char needle, char haystack[], char replace);
 int round_up(int x, int round);
+int validateCSV(char numbersCSV[]);
+void translateCSV(char numbersCSV[], double numbers[], int * count);
+
+#define FALSE 0
+#define TRUE 1
+#define MAX_CHARS 81
 
 #endif
 
