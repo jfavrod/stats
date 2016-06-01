@@ -10,6 +10,7 @@
 void usage(void);
 double mean(double numbers[], int count);
 double median(double numbers[], int count);
+double mode(double numbers[], int count);
 
 #define MAX_NUMBERS 1000000
 
@@ -21,16 +22,16 @@ int main(int argc, char *argv[])
     double numbers[MAX_NUMBERS] = {0.0};
     int    count                = 0;
 
-    if (argc == 1 || argc < 1 || argc > 3 || !validateCSV(argv[2])) {
+    if (argc != 3 || !validateCSV(argv[2])) {
         usage();
     }
     else {
         translateCSV(argv[2], numbers, &count);
         if (strcmp(argv[1], "mean") == 0) {
-            mean(numbers, count);
+            printf("The mean is: %f\n", mean(numbers, count));
         }
         else if (strcmp(argv[1], "median") == 0) {
-            median(numbers, count);
+            printf("The median is: %f\n", median(numbers, count));
         }
         else {
             usage();
@@ -62,10 +63,12 @@ void usage()
 /**
  * mean
  *
- * @param char numbers[] a string representation of a csv list of
- * numbers (ints or doubles).
+ * Finds the mean of a given numerical dataset.
  *
- * @return void
+ * @param double numbers[] Our numerical dataset.
+ * @param int count The number of items in the dataset.
+ *
+ * @return double The mean of the dataset.
  */
 
 double mean(double numbers[], int count)
@@ -77,7 +80,6 @@ double mean(double numbers[], int count)
         sum = sum + numbers[i];
     }
 
-    printf("The mean is: %f\n", sum/count);
     return sum/count;
 }
 
@@ -85,10 +87,12 @@ double mean(double numbers[], int count)
 /**
  * median
  *
- * @param char numbers[] a string representation of a csv list of
- * numbers (ints or doubles).
+ * Finds the median of a given numerical dataset.
  *
- * @return double The median of the given numbers.
+ * @param double numbers[] Our numerical dataset.
+ * @param int count The number of items in the dataset.
+ *
+ * @return double The median of the dataset.
  */
 
 double median(double numbers[], int count)
@@ -106,7 +110,6 @@ double median(double numbers[], int count)
         tmp[0] = mean(tmp, 2);
     }
 
-    printf("The meadian is: %f\n", tmp[0]);
     return tmp[0];
 }
 
@@ -114,15 +117,17 @@ double median(double numbers[], int count)
 /**
  * mode
  *
- * @param char numbers[] a string representation of a csv list of
- * numbers (ints or doubles).
+ * Finds the mode of a given numerical dataset.
  *
- * @return void
+ * @param double numbers[] Our numerical dataset.
+ * @param int count The number of items in the dataset.
+ *
+ * @return double The mode of the dataset.
  */
 
-double mode(char numbers[])
+double mode(double numbers[], int count)
 {
-    printf("mode numbers are %s\n", numbers);
+    printf("mode numbers is: ");
 
     return 0.0;
 }
