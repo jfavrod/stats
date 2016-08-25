@@ -12,7 +12,7 @@ double mean(double numbers[], int count);
 double median(double numbers[], int count);
 double mode(double numbers[], int count);
 
-#define MAX_NUMBERS 1000000
+#define MAX_NUMBERS 102400
 
 #endif
 
