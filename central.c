@@ -12,6 +12,9 @@ double mean(double numbers[], int count);
 double median(double numbers[], int count);
 double mode(double numbers[], int count);
 
+void darray_push(double e, double a[]);
+int in_darray(double e, double a[], int count);
+
 #define MAX_NUMBERS 102400
 
 #endif
@@ -114,6 +117,24 @@ double median(double numbers[], int count)
 }
 
 
+int in_darray(double e, double a[], int count)
+{
+    return 1;
+}
+
+
+void darray_push(double e, double a[])
+{
+    int i = 0;
+
+    while(a[i] != 0) {
+        i++;
+    }
+
+    a[i] = e;
+}
+
+
 /**
  * mode
  *
@@ -127,7 +148,16 @@ double median(double numbers[], int count)
 
 double mode(double numbers[], int count)
 {
-    printf("mode numbers is: ");
+    int n = -1;
+    int i = 0;
+    double a[MAX_NUMBERS];
+    double b[MAX_NUMBERS];
+
+    for (; i < count; i++) {
+        if (in_darray(numbers[i], a, count)) {
+            printf("in array\n");
+        }
+    }
 
     return 0.0;
 }
