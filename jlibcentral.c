@@ -21,6 +21,8 @@ void usage(void);
 double mean(double numbers[], int count);
 double median(double numbers[], int count);
 struct m mode(double numbers[], int count);
+struct m new_m(int count, double modes[]);
+int cmp_m (struct m m1, struct m m2);
 
 #endif
 
@@ -133,3 +135,33 @@ struct m mode(double numbers[], int count)
     return mx;
 }
 
+
+struct m new_m(int count, double modes[])
+{
+    struct m tmp;
+
+    tmp.count = count;
+    tmp.modes = modes;
+
+    return tmp;
+}
+
+
+int cmp_m (struct m m1, struct m m2) {
+    int i;
+
+    if (m1.count != m2.count) {
+        return 0;
+    }
+
+    qsort(m1.modes, m1.count, sizeof(m1.modes[0]), ascending);
+    qsort(m2.modes, m2.count, sizeof(m2.modes[0]), ascending);
+
+    for (i = 0; i < m1.count; i++) {
+        if (m1.modes[i] != m2.modes[i]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}

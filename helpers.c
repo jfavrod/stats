@@ -326,11 +326,11 @@ int in_darray(double needle, double haystack[], int count)
 
 void print_iarray(int a[], int count)
 {
-    int i = 0;
+    int i;
 
     printf("[ ");
 
-    for (i; i < (count - 1); i++) {
+    for (i = 0; i < (count - 1); i++) {
         printf("%d, ", a[i]);
     }
 
@@ -349,11 +349,11 @@ void print_iarray(int a[], int count)
 
 void print_darray(double a[], int count)
 {
-    int i = 0;
+    int i;
 
     printf("[ ");
 
-    for (i; i < (count - 1); i++) {
+    for (i = 0; i < (count - 1); i++) {
         printf("%f, ", a[i]);
     }
 

@@ -10,7 +10,7 @@ all :
 central : helpers.o central.o
 	$(CC) -o central helpers.o central.o -lm
 
-test_jlibcentral : helpers.o 
+test_jlibcentral : helpers.o
 	$(CC) -o test_jlibcentral helpers.o jlibcentral.test.c -lm
 
 central.o : helpers.o jlibcentral.o
