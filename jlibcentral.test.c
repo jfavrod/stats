@@ -1,7 +1,7 @@
 #include "jlibcentral.c"
 
 /* Increment whenever adding a test_array. */
-#define TEST_COUNT 3
+#define TEST_COUNT 4
 
 void test_mean(double input[], int count, double expected);
 void test_median(double input[], int count, double expected);
@@ -13,23 +13,25 @@ struct m new_m(int count, double numbers[]);
 double test_array[TEST_COUNT][MAX_NUMBERS] = {
     {12.3, 10.6, 14.0, 27.2, 9.0},
     {1, 2, 4, 7, 7, 10, 2, 4, 5, 22},
-    {26, 33, 65, 28, 34, 55, 25, 44, 50, 36, 26, 37, 43, 62, 35, 38, 45, 32, 28, 34}
+    {26, 33, 65, 28, 34, 55, 25, 44, 50, 36, 26, 37, 43, 62, 35, 38, 45, 32, 28, 34},
+    {20, 15, 26, 32, 18, 28, 35, 14, 26, 22, 17}
 };
 
 /* Corresponds to the count of numbers in each test_array entry. */
-int count[TEST_COUNT] = {5, 10, 20};
+int count[TEST_COUNT] = {5, 10, 20, 11};
 
 /* The expected outcomes of the tests */
-double mean_expected[TEST_COUNT]   = { 14.62, 6.4, 38.8};
-double median_expected[TEST_COUNT] = { 12.3, 4.5, 35.5 };
+double mean_expected[TEST_COUNT]   = { 14.62, 6.4, 38.8, 23 };
+double median_expected[TEST_COUNT] = { 12.3, 4.5, 35.5, 22 };
 double mode_expected[TEST_COUNT][MAX_NUMBERS] = {
     {12.3, 10.6, 14.0, 27.2, 9.0},
     {2, 4, 7},
-    {26, 28, 34}
+    {26, 28, 34},
+    {26}
 };
 
 /* Corresponds with the count of numbers in mode_expected array entry. */
-int mode_expected_count[] = {5, 3, 3};
+int mode_expected_count[] = {5, 3, 3, 1};
 
 
 int main()
