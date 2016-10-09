@@ -52,14 +52,14 @@ void test_mean(double input[], int count, double expected)
 {
     double actual = mean(input, count);
 
-    printf("Testing mean\n" );
-    printf("Expecting %f and got %f: ", expected, actual);
+    printf("Testing mean:\n" );
+    printf("Expecting %f and got %f.", expected, actual);
 
     if (expected == actual) {
-        printf("pass.\n");
+        printf("\n* Pass *\n");
     }
     else {
-        printf("fail.\n");
+        printf("\n* Fail *\n");
     }
 }
 
@@ -68,14 +68,14 @@ void test_median(double input[], int count, double expected)
 {
     double actual = median(input, count);
 
-    printf("Testing median\n");
-    printf("Expecting %f and got %f: ", expected, actual);
+    printf("Testing median:\n");
+    printf("Expecting %f and got %f.", expected, actual);
 
     if (expected == actual) {
-        printf("pass.\n");
+        printf("\n* Pass *\n");
     }
     else {
-        printf("fail.\n");
+        printf("\n* Fail *\n");
     }
 }
 
@@ -85,7 +85,7 @@ void test_mode(double input[], int in_count, double expected[], int ex_count)
     struct m expect = new_m(ex_count, expected);
     struct m actual = mode(input, in_count);
 
-    printf("Testing mode\n");
+    printf("Testing mode:\n");
     printf("Expecting ");
     print_darray(expect.modes, expect.count);
 
@@ -93,10 +93,10 @@ void test_mode(double input[], int in_count, double expected[], int ex_count)
     print_darray(actual.modes, actual.count);
 
     if (!cmp_m(expect, actual)) {
-        printf(":fail.\n");
+        printf("* Fail *\n");
     }
     else {
-        printf(":pass.\n");
+        printf("* Pass *\n");
     }
 
     return;
