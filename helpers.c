@@ -271,6 +271,9 @@ void translateCSV(char numbersCSV[], double numbers[], int * count)
 ****************************************************************/
 
 int ascending(const void *p, const void *q) {
+    return ( *(double*)p - *(double*)q );
+
+    /*
     int x = *(const int *)p;
     int y = *(const int *)q;
 
@@ -280,6 +283,7 @@ int ascending(const void *p, const void *q) {
         return 1;   
 
     return 0;
+    */
 }
 
 
@@ -303,9 +307,111 @@ int in_darray(double needle, double haystack[], int count)
 
     for (i = 0; i < count; i++) {
         if (haystack[i] == needle) {
-            return 1;
+            return i;
         }
     }
 
     return 0;
 }
+
+
+/*****************************************************************
+// Function name:    print_iarray
+//
+// Description:      Print the contents of an array of ints.
+//
+// Parameters:       int[] a An array to print.
+//                   count (int) The number of items in a.
+****************************************************************/
+
+void print_iarray(int a[], int count)
+{
+    int i = 0;
+
+    printf("[ ");
+
+    for (i; i < (count - 1); i++) {
+        printf("%d, ", a[i]);
+    }
+
+    printf("%d ]\n", a[i]);
+}
+
+
+/*****************************************************************
+// Function name:    print_darray
+//
+// Description:      Print the contents of an array of doubles.
+//
+// Parameters:       double[] a An array to print.
+//                   count (int) The number of items in a.
+****************************************************************/
+
+void print_darray(double a[], int count)
+{
+    int i = 0;
+
+    printf("[ ");
+
+    for (i; i < (count - 1); i++) {
+        printf("%f, ", a[i]);
+    }
+
+    printf("%f ]\n", a[i]);
+}
+
+
+/*****************************************************************
+// Function name:    darray_indexof
+//
+// Description:      Returns the index of the first accurance of
+//                   a double in an array.
+//
+// Parameters:       double number The double to search for.
+//                   double[] a An array to print.
+//                   count (int) The number of items in a.
+//
+// Return Value:     int The array of the found double or -1
+//                   if the double isn't in the array..
+****************************************************************/
+
+int darray_indexof(double number, double a[], int count) {
+    int i = 0;
+
+    for (i = 0; i < count; i++) {
+        if (a[i] == number) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+/*****************************************************************
+// Function name:    max_int
+//
+// Description:      Find the greatest integer in an array.
+//
+// Parameters:       int[] a An integer array.
+//                   count (int) The number of items in a.
+//
+// Return Value:     int The greatest integer in the array.
+****************************************************************/
+
+int max_int(int a[], int count)
+{
+    int i   = 1;
+    int max = a[0];
+
+    while (i < count) {
+        if (a[i] > max) {
+            max = a[i];
+        }
+
+        i++;
+    }
+
+    return max;
+}
+

@@ -7,12 +7,20 @@
 #include "helpers.h"
 #include <math.h>
 
+#define MAX_NUMBERS 102400
+
+
+struct m {
+    int count;
+    double *modes;
+};
+
+double modes[MAX_NUMBERS] = {0};
+
 void usage(void);
 double mean(double numbers[], int count);
 double median(double numbers[], int count);
-double mode(double numbers[], int count);
-
-#define MAX_NUMBERS 102400
+struct m mode(double numbers[], int count);
 
 #endif
 
@@ -56,10 +64,15 @@ double median(double numbers[], int count)
 {
     double tmp[2];
 
-    qsort(numbers, count, MAX_NUMBERS, ascending);
+    /* Linux: */
+    /* qsort(numbers, count, MAX_NUMBERS, ascending); */
+
+    /* Darwin: */
+    qsort(numbers, count, sizeof(tmp[0]), ascending);
 
     if ((count % 2) != 0) {
-        tmp[0] = numbers[(int)ceil(count/2)];
+        int mid = ceil(count/2.0) - 1;
+        tmp[0] = numbers[mid];
     }
     else {
         tmp[0] = numbers[count/2];
@@ -82,19 +95,41 @@ double median(double numbers[], int count)
  * @return double The mode of the dataset.
  */
 
-double mode(double numbers[], int count)
+struct m mode(double numbers[], int count)
 {
-    int n = -1;
-    int i = 0;
-    double a[MAX_NUMBERS];
-    double b[MAX_NUMBERS];
+
+    double a[MAX_NUMBERS] = {0};
+    int b[MAX_NUMBERS]    = {0};
+    struct m mx           = {0, modes};
+
+    /* abc - The count of elements in a and b (a b count). */
+    int abc = 0;
+    int i   = 0;
+    int j   = 0;
+    int max = 0;
 
     for (; i < count; i++) {
-        if (in_darray(numbers[i], a, count)) {
-            printf("in array\n");
+        int index = darray_indexof(numbers[i], a, abc);
+
+        if (index == -1) {
+            a[abc] = numbers[i];
+            b[abc]++;
+            abc++;
+        }
+        else {
+            b[index]++;
         }
     }
 
-    return 0.0;
+    for (i = 0; i < abc; i++) {
+        max = max_int(b, abc);
+
+        if (b[i] == max) {
+            mx.count++;
+            mx.modes[j++] = a[i];
+        }
+    }
+
+    return mx;
 }
 

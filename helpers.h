@@ -27,6 +27,10 @@ int validateCSV(char numbersCSV[]);
 void translateCSV(char numbersCSV[], double numbers[], int * count);
 int ascending(const void *p, const void *q);
 int in_darray(double needle, double haystack[], int count);
+void print_darray(double a[], int count);
+int darray_indexof(double number, double a[], int count);
+void print_iarray(int a[], int count);
+int max_int(int a[], int count);
 
 #define FALSE 0
 #define TRUE 1
