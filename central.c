@@ -1,4 +1,4 @@
-#include "jlibcentral.c";
+#include "jlibcentral.c"
 
 void usage();
 
