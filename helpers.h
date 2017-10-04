@@ -31,6 +31,8 @@ void print_darray(double a[], int count);
 int darray_indexof(double number, double a[], int count);
 void print_iarray(int a[], int count);
 int max_int(int a[], int count);
+double max_double(double a[], int count);
+double min_double(double a[], int count);
 
 #define FALSE 0
 #define TRUE 1

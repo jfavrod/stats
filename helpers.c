@@ -375,7 +375,8 @@ void print_darray(double a[], int count)
 //                   if the double isn't in the array..
 ****************************************************************/
 
-int darray_indexof(double number, double a[], int count) {
+int darray_indexof(double number, double a[], int count)
+{
     int i = 0;
 
     for (i = 0; i < count; i++) {
@@ -413,5 +414,61 @@ int max_int(int a[], int count)
     }
 
     return max;
+}
+
+
+/*****************************************************************
+// Function name:    max_double
+//
+// Description:      Find the greatest double in an array.
+//
+// Parameters:       double[] a An double array.
+//                   count (int) The number of items in a.
+//
+// Return Value:     double The greatest integer in the array.
+****************************************************************/
+
+double max_double(double a[], int count)
+{
+    int i   = 1;
+    double max = a[0];
+
+    while (i < count) {
+        if (a[i] > max) {
+            max = a[i];
+        }
+
+        i++;
+    }
+
+    return max;
+}
+
+
+/*****************************************************************
+// Function name:    min_double
+//
+// Description:      Find the least double in an array.
+//
+// Parameters:       double[] a An double array.
+//                   count (int) The number of items in a.
+//
+// Return Value:     double The least integer in the array.
+****************************************************************/
+
+double min_double(double a[], int count)
+{
+    int i   = 1;
+    double min = a[0];
+
+    while (i < count) {
+        if (a[i] < min) {
+            min = a[i];
+        }
+
+        i++;
+    }
+
+    return min;
 }
 
