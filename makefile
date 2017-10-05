@@ -6,28 +6,31 @@ all :
 	make test_jlibcentral
 	make test_jlibvariance
 	make central
-	make clean
 
 central : helpers.o central.o
-	$(CC) -o central helpers.o central.o -lm
+	$(CC) -o bin/central build/helpers.o build/central.o -lm
 
 test_jlibcentral : helpers.o
-	$(CC) -o test_jlibcentral helpers.o jlibcentral.test.c -lm
+	$(CC) -o bin/tests/test_jlibcentral build/helpers.o src/jlibcentral.test.c -lm
 
 test_jlibvariance : jlibcentral.o helpers.o
-	$(CC) -o test_jlibvariance helpers.o jlibcentral.o jlibvariance.test.c -lm
+	$(CC) -o bin/tests/test_jlibvariance build/helpers.o build/jlibcentral.o src/jlibvariance.test.c -lm
 
 central.o : helpers.o jlibcentral.o
-	$(CC) -c helpers.o jlibcentral.o central.c 
+	$(CC) -c build/helpers.o build/jlibcentral.o src/central.c 
+	mv central.o build/
 
-helpers.o : helpers.h
-	$(CC) -c helpers.c
+helpers.o : src/inc/helpers.h
+	$(CC) -c src/helpers.c
+	mv helpers.o build/
 
-jlibcentral.o : jlibcentral.h jlibcentral.c
-	$(CC) -c jlibcentral.c
+jlibcentral.o : src/inc/jlibcentral.h src/jlibcentral.c
+	$(CC) -c src/jlibcentral.c
+	mv jlibcentral.o build/
 
-jlibvariance.o : jlibvariance.h jlibvariance.c
-	$(CC) -c jlibvariance.c
+jlibvariance.o : src/inc/jlibvariance.h src/jlibvariance.c
+	$(CC) -c src/jlibvariance.c
+	mv jlibvariance.o build/
 
 clean :
 	rm *.o
