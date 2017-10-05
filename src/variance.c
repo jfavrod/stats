@@ -1,6 +1,4 @@
-#include "jlibvariance.c"
-
-void usage();
+#include "inc/variance.h"
 
 
 int main()

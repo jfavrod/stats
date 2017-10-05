@@ -1,6 +1,4 @@
-#include "jlibcentral.c"
-
-void usage();
+#include "inc/central.h"
 
 
 int main(int argc, char *argv[])

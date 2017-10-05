@@ -8,24 +8,24 @@ all :
 	make central
 	make variance
 
-central : helpers.o central.o
-	$(CC) -o bin/central build/helpers.o build/central.o -lm
+central : central.o
+	$(CC) -o bin/central build/helpers.o build/jlibcentral.o build/central.o
 
-variance : helpers.o central.o variance.o
-	$(CC) -o bin/variance build/helpers.o build/jlibcentral.o build/variance.o -lm
+variance : helpers.o variance.o
+	$(CC) -o bin/variance build/helpers.o build/jlibcentral.o build/variance.o
 
 test_jlibcentral : helpers.o
-	$(CC) -o bin/tests/test_jlibcentral build/helpers.o src/jlibcentral.test.c -lm
+	$(CC) -o bin/tests/test_jlibcentral build/helpers.o src/jlibcentral.test.c
 
 test_jlibvariance : jlibcentral.o helpers.o
-	$(CC) -o bin/tests/test_jlibvariance build/helpers.o build/jlibcentral.o src/jlibvariance.test.c -lm
+	$(CC) -o bin/tests/test_jlibvariance build/helpers.o build/jlibcentral.o src/jlibvariance.test.c
 
-central.o : helpers.o jlibcentral.o
-	$(CC) -c build/helpers.o build/jlibcentral.o src/central.c 
+central.o :
+	$(CC) -c src/central.c
 	mv central.o build/
 
-variance.o : helpers.o jlibvariance.o
-	$(CC) -c build/helpers.o build/jlibvariance.o src/variance.c 
+variance.o :
+	$(CC) -c src/variance.c 
 	mv variance.o build/
 
 helpers.o : src/inc/helpers.h
