@@ -1,10 +1,49 @@
-#include "jlibvariance.c"
+#include "inc/jlibvariance.test.h"
+
 
 int main()
 {
-    double d[] = { 600.0, 470.0, 170.0, 430.0, 300.0 };
-    printf("The range is %f\n", range(d, 5));
-    printf("The sample variance is %f\n", sample_variance(d, 5));
+    int i = 0;
+    double expected;
+    double actual;
+
+    /* Test sample_variance. */
+
+    for (i; i < TEST_COUNT; i++) {
+        expected = expected_sample_results[i];
+        actual = sample_variance(test_sample[i], SAMPLE_SIZE);
+
+        printf("sample_variance test %i\n", i);
+        printf("expected: %f, actual: %f\n", expected, actual);
+
+        if (fabs(expected - actual) < 0.00001) {
+            printf("**pass**\n");
+        }
+        else {
+            printf("**fail**\n");
+        }
+    }
+
+    i = 0;
+    printf("\n");
+
+    /* Test population_variance. */
+
+    for (i; i < TEST_COUNT; i++) {
+        expected = expected_population_results[i];
+        actual = population_variance(test_population[i], POPULATION_SIZE);
+
+        printf("population_variance test %i\n", i);
+        printf("expected: %f, actual: %f\n", expected, actual);
+
+        if (fabs(expected - actual) < 0.00001) {
+            printf("**pass**\n");
+        }
+        else {
+            printf("**fail**\n");
+        }
+    }
+
     return 0;
 }
 
