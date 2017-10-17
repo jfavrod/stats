@@ -1,4 +1,4 @@
-#include "inc/central.h"
+#include "central.h"
 
 
 int main(int argc, char *argv[])

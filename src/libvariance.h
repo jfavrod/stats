@@ -1,5 +1,5 @@
-#ifndef JLIBVARIANCE_H
-#define JLIBVARIANCE_H
+#ifndef LIBVARIANCE_H
+#define LIBVARIANCE_H
 
 #include <math.h>
 #include "helpers.h"

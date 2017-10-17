@@ -3,22 +3,22 @@
 CC=gcc -ansi -Wall
 
 all :
-	make test_jlibcentral
-	make test_jlibvariance
+	make test_libcentral
+	make test_libvariance
 	make central
 	make variance
 
 central : central.o
-	$(CC) -o bin/central build/helpers.o build/jlibcentral.o build/central.o -lm
+	$(CC) -o bin/central build/helpers.o build/libcentral.o build/central.o -lm
 
 variance : helpers.o variance.o
-	$(CC) -o bin/variance build/helpers.o build/jlibcentral.o build/variance.o -lm
+	$(CC) -o bin/variance build/helpers.o build/libcentral.o build/variance.o -lm
 
-test_jlibcentral : helpers.o
-	$(CC) -o bin/tests/test_jlibcentral build/helpers.o src/jlibcentral.test.c -lm
+test_libcentral : helpers.o
+	$(CC) -o bin/tests/test_libcentral build/helpers.o test/libcentral.c -lm
 
-test_jlibvariance : jlibcentral.o helpers.o
-	$(CC) -o bin/tests/test_jlibvariance build/helpers.o build/jlibcentral.o src/jlibvariance.test.c -lm
+test_libvariance : libcentral.o helpers.o
+	$(CC) -o bin/tests/test_libvariance build/helpers.o build/libcentral.o test/libvariance.c -lm
 
 central.o :
 	$(CC) -c src/central.c
@@ -28,20 +28,20 @@ variance.o :
 	$(CC) -c src/variance.c 
 	mv variance.o build/
 
-helpers.o : src/inc/helpers.h
+helpers.o : src/helpers.h
 	$(CC) -c src/helpers.c
 	mv helpers.o build/
 
-jlibcentral.o : src/inc/jlibcentral.h src/jlibcentral.c
-	$(CC) -c src/jlibcentral.c
-	mv jlibcentral.o build/
+libcentral.o : src/libcentral.h src/libcentral.c
+	$(CC) -c src/libcentral.c
+	mv libcentral.o build/
 
-jlibvariance.o : src/inc/jlibvariance.h src/jlibvariance.c
-	$(CC) -c src/jlibvariance.c
-	mv jlibvariance.o build/
+libvariance.o : src/libvariance.h src/libvariance.c
+	$(CC) -c src/libvariance.c
+	mv libvariance.o build/
 
 clean :
 	rm bin/central
 	rm bin/variance
-	rm bin/tests/test_jlib*
+	rm bin/tests/test_lib*
 	rm build/*.o

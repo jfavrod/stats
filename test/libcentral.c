@@ -1,4 +1,4 @@
-#include "jlibcentral.c" 
+#include "../src/libcentral.c" 
 
 /* Increment whenever adding a test_array. */
 #define TEST_COUNT 5

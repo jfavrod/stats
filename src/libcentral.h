@@ -1,5 +1,5 @@
-#ifndef JLIBCENTRAL_H
-#define JLIBCENTRAL_H
+#ifndef LIBCENTRAL_H
+#define LIBCENTRAL_H
 
 #include <stdio.h>
 #include <string.h>

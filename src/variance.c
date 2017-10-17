@@ -1,4 +1,4 @@
-#include "inc/variance.h"
+#include "variance.h"
 
 
 int main()

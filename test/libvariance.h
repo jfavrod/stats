@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../jlibvariance.c"
+#include "../src/libvariance.c"
 
 #define TEST_COUNT 5
 #define SAMPLE_SIZE 5

@@ -1,4 +1,4 @@
-#include "inc/jlibvariance.h"
+#include "libvariance.h"
 
 
 double range(double values[], int count)

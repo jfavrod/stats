@@ -1,4 +1,4 @@
-#include "inc/jlibvariance.test.h"
+#include "libvariance.h"
 
 
 int main()
