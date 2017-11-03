@@ -261,6 +261,29 @@ void translateCSV(char numbersCSV[], double numbers[], int * count)
 
 
 /*****************************************************************
+// Function name:       csvToDarray
+//
+// Description:         Takes the numbersCSV and convert its
+//                      values to doubles and puts them in an
+//                      array (e.g. "88" = 88).
+//
+// Parameters:          numbersCSV (char[]) The CSV representing
+//                      the working numbers.
+//
+//                      numbers (double[]) The array that contains
+//                      the numbers translated to doubles from the
+//                      CSV.
+//
+// Return values:       void
+****************************************************************/
+
+void csvToDarray(char numbersCSV[], double numbers[], int * count)
+{
+    translateCSV(numbersCSV, numbers, count);
+}
+
+
+/*****************************************************************
 // Function name:       ascending
 //
 // Description:         Sort function for qsort for assending sort.

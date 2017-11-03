@@ -25,6 +25,7 @@ int str_replace(char needle, char haystack[], char replace);
 int round_up(int x, int round);
 int validateCSV(char numbersCSV[]);
 void translateCSV(char numbersCSV[], double numbers[], int * count);
+void csvToDarray(char numbersCSV[], double numbers[], int * count);
 int ascending(const void *p, const void *q);
 int in_darray(double needle, double haystack[], int count);
 void print_darray(double a[], int count);
