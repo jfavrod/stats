@@ -9,7 +9,7 @@ int main()
 
     /* Test sample_variance. */
 
-    for (i; i < TEST_COUNT; i++) {
+    for (; i < TEST_COUNT; i++) {
         expected = expected_sample_results[i];
         actual = sample_variance(test_sample[i], SAMPLE_SIZE);
 
@@ -29,7 +29,7 @@ int main()
 
     /* Test population_variance. */
 
-    for (i; i < TEST_COUNT; i++) {
+    for (; i < TEST_COUNT; i++) {
         expected = expected_population_results[i];
         actual = population_variance(test_population[i], POPULATION_SIZE);
 
