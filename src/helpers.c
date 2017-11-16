@@ -495,3 +495,28 @@ double min_double(double a[], int count)
     return min;
 }
 
+
+/*****************************************************************
+// Function name:    sum
+//
+// Description:      The summation of the given array.
+//
+// Parameters:       double[] a An double array.
+//                   count (int) The number of items in a.
+//
+// Return Value:     double The sum of the elements in a.
+****************************************************************/
+
+double sum(double A[], int n)
+{
+    int i = 0;
+    double sum = 0.0;
+
+    while (i < n)
+    {
+        sum = sum + A[i++];
+    }
+
+    return sum;
+}
+
