@@ -5,14 +5,16 @@ CC=gcc -ansi -Wall
 all :
 	make test_libcentral
 	make test_libvariance
+	make libcentral.o
+	make libvariance.o
 	make central
 	make variance
 
 central : central.o
 	$(CC) -o bin/central build/helpers.o build/libcentral.o build/central.o -lm
 
-variance : helpers.o variance.o
-	$(CC) -o bin/variance build/helpers.o build/libcentral.o build/variance.o -lm
+variance : helpers.o central.o variance.o
+	$(CC) -o bin/variance build/helpers.o build/libcentral.o build/libvariance.o build/variance.o -lm
 
 test_libcentral : helpers.o
 	$(CC) -o bin/tests/test_libcentral build/helpers.o test/libcentral.c -lm
